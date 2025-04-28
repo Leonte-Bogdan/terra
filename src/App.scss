@@ -1,0 +1,15 @@
+.app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+
+.popup-button {
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #15803d; 
+    }
+  }

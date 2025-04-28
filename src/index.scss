@@ -6,26 +6,16 @@
 
 html{
  height: 100%;
-width: 100%;
+ width: 100%;
 }
 
 body {
     height: 100%;
     background-image: url('../public/terra-background.png');
+    z-index: -1;
     background-size: 1920px 1200px;
     background-repeat: no-repeat;
     background-position: center;
     overflow: hidden;
-    position: relative;
-  }
-
-  body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    
   }
