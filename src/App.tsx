@@ -2,7 +2,7 @@ import "./App.scss";
 import { usePopup } from "./context/PopupContext";
 
 function App() {
-  const { showPopup, closePopup } = usePopup();
+  const { showPopup } = usePopup();
 
   const testPopup = () => {
     showPopup("Your lilac needs flowering!");
