@@ -1,21 +1,32 @@
 import "./Dashboard.scss";
+import { Routes, Route, Link } from "react-router";
 
-const Dashboard = (children) => {
+const Dashboard = ({ children }) => {
   return (
     <div className="dashboard">
       <div className="dashboard-main">
-        <div className="garden">
-          <button className="garden-btn">Garden</button>
-        </div>
-        <div className="terrarium">
-          <button className="terrarium-btn">Terrarium</button>
-        </div>
-        <div className="about">
-          <button className="about-btn">About</button>
-        </div>
-        <div className="mastery">
-          <button className="mastery-btn">Mastery</button>
-        </div>
+        <nav>
+          <Link to="/garden">
+            <button className="garden-btn">Garden</button>
+          </Link>
+          <Link to="/terrarium">
+            <button className="terrarium-btn">Terrarium</button>
+          </Link>
+          <Link to="/about">
+            <button className="about-btn">About</button>
+          </Link>
+          <Link to="/mastery">
+            <button className="mastery-btn">Mastery</button>
+          </Link>
+        </nav>
+
+        <Routes>
+          <Route path="/garden" element={<div>Garden Content</div>} />
+          <Route path="/terrarium" element={<div>Terrarium Content</div>} />
+          <Route path="/about" element={<div>About Content</div>} />
+          <Route path="/mastery" element={<div>Mastery Content</div>} />
+          <Route path="/" element={children} />
+        </Routes>
       </div>
       <div className="dashboard-signup">
         <button className="login-btn">Log in</button>
@@ -24,4 +35,5 @@ const Dashboard = (children) => {
     </div>
   );
 };
+
 export default Dashboard;
