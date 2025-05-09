@@ -1,0 +1,21 @@
+
+.user-interface {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    height: 45rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    position: fixed;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    
+    &__text {
+      color: #6b7280;
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+  }
