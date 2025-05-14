@@ -5,7 +5,7 @@ import App from "./App";
 import { PopupProvider } from "./context/PopupContext";
 import Popup from "./components/popup/Popup";
 import Dashboard from "./components/dashboard/Dashboard";
-import UserInterface from "./components/userInterface/UserInterface";
+import UserInterface from "./components/plant-creation/PlantCreation";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router";
 
 createRoot(document.getElementById("root")).render(
