@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 package-lock.json
+package.json
 tsconfig.json
 dist
 dist-ssr
@@ -19,7 +20,7 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
-*.suo
+*.suo   
 *.ntvs*
 *.njsproj
 *.sln
