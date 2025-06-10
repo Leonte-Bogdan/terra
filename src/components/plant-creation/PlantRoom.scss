@@ -1,0 +1,140 @@
+.user-interface {
+  position: relative;
+  width: 75%;
+  height: 45rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  position: fixed;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* ----------------------- BENCH & POTS -------------------------*/
+
+.bench {
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  background: linear-gradient(to bottom, #8b4513, #6a3805);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  margin: 1rem auto -35rem;
+  margin-top: 25rem;
+}
+
+.flower-pot {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  bottom: 5rem;
+  align-items: center;
+  width: 80px;
+  height: 5rem;
+  position: relative;
+  background-color: #d35400;
+  border-radius: 5px 5px 40px 40px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: -5px;
+    width: 90px;
+    height: 20px;
+    background-color: #d35400;
+    border-radius: 5px;
+  }
+}
+.pot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  margin: 2.5rem;
+}
+
+/* ---------------- WINDOW ----------------- */
+
+.window {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(5rem);
+  width: 25rem;
+  height: 30%;
+  margin-left: 32.5rem;
+
+  background: url("../../../public/windowbackground.jpg") center/cover,
+    linear-gradient(135deg, #87ceeb 0%, #e0f6ff 100%);
+  border: 8px solid #8b4513;
+  border-radius: 8px;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #8b4513;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #8b4513;
+    transform: translateX(-50%);
+  }
+}
+
+.window-sill {
+  position: absolute;
+  bottom: -10px;
+  left: -8px;
+  right: -8px;
+  height: 10px;
+  background: #3f5822;
+  border-radius: 0 0 4px 4px;
+}
+
+/* ------------- SHELVES ----------------- */
+
+.watering-can-shelf {
+  position: relative;
+  width: 4rem;
+  height: 0.5rem;
+  transform: translateY(8rem);
+  margin-left: 9rem;
+  background: #8b4513;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.watering-can-shelf::before,
+.watering-can-shelf::after {
+  content: "";
+  position: absolute;
+  width: 0.3rem;
+  height: 0.4rem;
+  background: #654321;
+  top: 0.4rem;
+}
+
+.watering-can-shelf::before {
+  left: 0.2rem;
+}
+
+.watering-can-shelf::after {
+  right: 0.2rem;
+}

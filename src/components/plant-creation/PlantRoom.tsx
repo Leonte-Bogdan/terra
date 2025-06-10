@@ -1,8 +1,9 @@
-import "./PlantCreation.scss";
+import "./PlantRoom.scss";
 
-const PlantComponent = () => {
+const PlantRoom = () => {
   return (
     <div className="user-interface">
+      <div className="watering-can-shelf"></div>
       <div className="window">
         <div className="window-sill"></div>
       </div>
@@ -15,4 +16,4 @@ const PlantComponent = () => {
   );
 };
 
-export default PlantComponent;
+export default PlantRoom;
