@@ -1,25 +1,22 @@
-*{
-    padding: 0;
-    box-sizing: border-box;  
-    margin: 0;  
+* {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
 }
 
-html{
- height: 100%;
- width: 100%;
+html {
+  height: 100%;
+  width: 100%;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-image: url('../public/terra-background.png');
-    z-index: -1;
-    background-size: 1920px 1200px;
-    background-repeat: no-repeat;
-    background-position: center;
-    overflow: hidden;
-    
-  }
-
-  
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-image: url("../public/terra-background.png");
+  z-index: -1;
+  background-size: 1920px 1200px;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+}
