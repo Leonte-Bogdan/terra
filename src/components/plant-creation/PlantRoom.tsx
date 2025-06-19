@@ -70,6 +70,9 @@ const PlantRoom = () => {
       <div className="window">
         <div className="window-sill"></div>
       </div>
+      <div className="closet-container">
+        <div className="closet"></div>
+      </div>
       <div className="bench">
         <div
           className="basket-container"
