@@ -1,13 +1,26 @@
 import "./Dashboard.scss";
 import { Routes, Route, Link } from "react-router";
+import { useState } from "react";
+import GardenModal from "./modals/GardenModal";
 
 const Dashboard = ({ children }) => {
+  const [isGardenModalOpen, setIsGardenModalOpen] = useState(false);
+
   return (
     <div className="dashboard">
       <div className="dashboard-main">
         <nav>
           <Link to="/garden">
-            <button className="garden-btn">Garden</button>
+            <button
+              onClick={() => setIsGardenModalOpen(true)}
+              className="garden-btn"
+            >
+              Garden
+            </button>
+            <GardenModal
+              isOpen={isGardenModalOpen}
+              onClose={() => setIsGardenModalOpen(false)}
+            />
           </Link>
           <Link to="/terrarium">
             <button className="terrarium-btn">Terrarium</button>
