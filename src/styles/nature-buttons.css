@@ -1,0 +1,348 @@
+/* =================================
+   NATURE BUTTON LIBRARY v1.0
+   Reusable CSS component for nature-themed animated buttons
+   
+   Usage:
+   1. Include this CSS file in your project
+   2. Add classes to any button element:
+      - Base: .nature-btn
+      - Themes: .sun, .flower, .leaf, .garden
+   
+   Example:
+   <button class="nature-btn sun small">Click me</button>
+   ================================= */
+
+/* Base Nature Button Styles */
+.nature-btn {
+    position: relative;
+    padding: 12px 24px;
+    background: #ffffff;
+    border: 2px solid #4CAF50;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2E7D32;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;  
+    user-select: none;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    min-width: 120px;
+}
+
+.nature-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+    border-color: #66BB6A;
+    text-decoration: none;
+    color: #2E7D32;
+}
+
+.nature-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+}
+
+/* Size Variants */
+.nature-btn.small {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    min-width: 80px;
+}
+
+.nature-btn.large {
+    padding: 16px 32px;
+    font-size: 1.125rem;
+    min-width: 160px;
+}
+
+/* Color Variants */
+.nature-btn.primary {
+    background: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
+.nature-btn.primary:hover {
+    background: #66BB6A;
+    border-color: #66BB6A;
+    color: white;
+}
+
+.nature-btn.secondary {
+    background: transparent;
+    color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+/* SVG Icons Base Styles */
+.nature-btn svg {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Sparkle Effects */
+.nature-btn::before,
+.nature-btn::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #FFD700;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nature-btn::before {
+    top: 20%;
+    right: 20%;
+    animation: sparkle-1 1.5s ease-in-out infinite;
+}
+
+.nature-btn::after {
+    bottom: 20%;
+    left: 20%;
+    animation: sparkle-2 1.5s ease-in-out infinite 0.3s;
+}
+
+.nature-btn:hover::before,
+.nature-btn:hover::after {
+    opacity: 1;
+}
+
+/* SUN THEME */
+.nature-btn.sun {
+    border-color: #FF9800;
+    color: #E65100;
+}
+
+.nature-btn.sun:hover {
+    border-color: #FFB74D;
+    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.3);
+}
+
+.nature-btn.sun::before {
+    content: '☀️';
+    width: auto;
+    height: auto;
+    background: none;
+    font-size: 16px;
+    top: -8px;
+    right: -8px;
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.nature-btn.sun:hover::before {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+}
+
+.nature-btn.sun::after {
+    content: '✨';
+    width: auto;
+    height: auto;
+    background: none;
+    font-size: 12px;
+    bottom: -5px;
+    left: -5px;
+    animation-delay: 0.2s;
+}
+
+/* FLOWER THEME */
+.nature-btn.flower {
+    border-color: #E91E63;
+    color: #AD1457;
+}
+
+.nature-btn.flower:hover {
+    border-color: #F06292;
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.3);
+}
+
+.nature-btn.flower::before {
+    content: '🌸';
+    width: auto;
+    height: auto;
+    background: none;
+    font-size: 1rem;
+    top: 30%;
+    left: -2.3rem;
+    transform: scale(0);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.1s;
+}
+
+.nature-btn.flower:hover::before {
+    opacity: 1;
+    transform: scale(1);
+    animation: flower-sway 2s ease-in-out infinite alternate;
+}
+
+.nature-btn.flower::after {
+    content: '✨';
+    width: auto;
+    height: auto;
+    background: none;
+    font-size: 10px;
+    top: 15%;
+    left: 75%;
+}
+
+/* LEAF THEME */
+.nature-btn.leaf {
+    border-color: #8BC34A;
+    color: #558B2F;
+}
+
+.nature-btn.leaf:hover {
+    border-color: #AED581;
+    box-shadow: 0 8px 25px rgba(139, 195, 74, 0.3);
+}
+
+.nature-btn.leaf::before {
+    content: '🍃';
+    width: auto;
+    height: auto;
+    background: none;
+    font-size: 1rem;
+    top: 50%;
+    left: -3rem;
+    transform: translateY(-50%) scale(0) rotate(-90deg);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s;
+}
+
+.nature-btn.leaf:hover::before {
+    opacity: 1;
+    transform: translateY(-50%) scale(1) rotate(0deg);
+    animation: leaf-flutter 2.5s ease-in-out infinite alternate;
+}
+
+.nature-btn.leaf::after {
+    content: '✨';
+    width: auto;
+    height: auto;
+    background: none;
+    font-size: 10px;
+    top: 15%;
+    left: 80%;
+}
+
+/* GARDEN THEME (Multiple elements) */
+.nature-btn.garden {
+    border-color: #9C27B0;
+    color: #6A1B9A;
+}
+
+.nature-btn.garden:hover {
+    border-color: #BA68C8;
+    box-shadow: 0 8px 25px rgba(156, 39, 176, 0.3);
+}
+
+.nature-btn.garden::before {
+    content: '🌻';
+    width: auto;
+    height: auto;
+    background: none;
+    font-size: 18px;
+    top: -10px;
+    right: -10px;
+    transform: scale(0) rotate(-45deg);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.nature-btn.garden:hover::before {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+.nature-btn.garden::after {
+    content: '🦋';
+    width: auto;
+    height: auto;
+    background: none;
+    font-size: 14px;
+    bottom: -8px;
+    left: -8px;
+    transform: scale(0);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s;
+}
+
+.nature-btn.garden:hover::after {
+    opacity: 1;
+    transform: scale(1);
+    animation: butterfly-flutter 3s ease-in-out infinite;
+}
+
+/* ANIMATIONS */
+@keyframes sparkle-1 {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes sparkle-2 {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes flower-sway {
+    from { transform: scale(1) rotate(-5deg); }
+    to { transform: scale(1) rotate(5deg); }
+}
+
+@keyframes leaf-flutter {
+    from { transform: translateY(-50%) scale(1) rotate(-10deg); }
+    to { transform: translateY(-50%) scale(1) rotate(10deg); }
+}
+
+@keyframes butterfly-flutter {
+    0%, 100% { transform: scale(1) translateY(0); }
+    25% { transform: scale(1.1) translateY(-2px); }
+    50% { transform: scale(1) translateY(-1px); }
+    75% { transform: scale(1.1) translateY(-3px); }
+}
+
+/* DISABLED STATE */
+.nature-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1) !important;
+}
+
+.nature-btn:disabled::before,
+.nature-btn:disabled::after {
+    display: none;
+}
+
+/* ACCESSIBILITY */
+.nature-btn:focus {
+    outline: 2px solid #4CAF50;
+    outline-offset: 2px;
+}
+
+.nature-btn:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nature-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        min-width: 100px;
+    }
+    
+    .nature-btn.large {
+        padding: 12px 24px;
+        font-size: 1rem;
+        min-width: 120px;
+    }
+}

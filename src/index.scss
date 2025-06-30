@@ -13,10 +13,13 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-image: url("../public/terra-background.png");
+  background-image: url("terra-background.png");
   z-index: -1;
   background-size: 1920px 1200px;
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+@import url("./styles/nature-buttons.css");

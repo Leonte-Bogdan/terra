@@ -2,9 +2,11 @@ import "./Dashboard.scss";
 import { Routes, Route, Link } from "react-router";
 import { useState } from "react";
 import GardenModal from "./modals/GardenModal";
+import AboutModal from "./modals/AboutModal";
 
 const Dashboard = ({ children }) => {
   const [isGardenModalOpen, setIsGardenModalOpen] = useState(false);
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
   return (
     <div className="dashboard">
@@ -13,7 +15,7 @@ const Dashboard = ({ children }) => {
           <Link to="/garden">
             <button
               onClick={() => setIsGardenModalOpen(true)}
-              className="garden-btn"
+              className="nature-btn sun small"
             >
               Garden
             </button>
@@ -23,13 +25,22 @@ const Dashboard = ({ children }) => {
             />
           </Link>
           <Link to="/terrarium">
-            <button className="terrarium-btn">Terrarium</button>
+            <button className="nature-btn leaf small">Terrarium</button>
           </Link>
           <Link to="/about">
-            <button className="about-btn">About</button>
+            <button
+              onClick={() => setIsAboutModalOpen(true)}
+              className="nature-btn flower small"
+            >
+              About
+            </button>
+            <AboutModal
+              isOpen={isAboutModalOpen}
+              onClose={() => setIsAboutModalOpen(false)}
+            />
           </Link>
           <Link to="/mastery">
-            <button className="mastery-btn">Mastery</button>
+            <button className="nature-btn garden small">Mastery</button>
           </Link>
         </nav>
 
@@ -42,8 +53,8 @@ const Dashboard = ({ children }) => {
         </Routes>
       </div>
       <div className="dashboard-signup">
-        <button className="login-btn">Log in</button>
-        <button className="signup-btn">Sign up</button>
+        <button className="login-btn nature-btn small">Log in</button>
+        <button className="signup-btn nature-btn small">Sign up</button>
       </div>
     </div>
   );
