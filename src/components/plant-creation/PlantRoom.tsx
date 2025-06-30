@@ -42,6 +42,7 @@ const PlantRoom = () => {
   };
   return (
     <div className="user-interface">
+      <div className="wall-background"></div>
       <div className="top-shelves-container">
         <div
           className="watering-can-shelf"
@@ -69,6 +70,9 @@ const PlantRoom = () => {
       </div>
       <div className="window">
         <div className="window-sill"></div>
+      </div>
+      <div className="closet-container">
+        <div className="closet"></div>
       </div>
       <div className="bench">
         <div

@@ -1,0 +1,52 @@
+.about-modal {
+  .modal-content {
+    padding: 10px 0;
+
+    .welcome-text {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #666;
+    }
+
+    .instructions-title {
+      color: #8b4513;
+      margin-bottom: 15px;
+    }
+
+    .instructions-list {
+      margin-bottom: 20px;
+      padding-left: 20px;
+      color: #666;
+
+      li {
+        margin-bottom: 8px;
+      }
+    }
+
+    .tip-section {
+      background: #f5f3f0;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #e8e2dc;
+
+      p {
+        margin: 0;
+        font-style: italic;
+        color: #8b4513;
+      }
+    }
+
+    .start-button {
+      background: #8b4513;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
