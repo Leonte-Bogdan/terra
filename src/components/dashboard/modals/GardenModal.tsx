@@ -32,47 +32,24 @@ const GardenModal = ({ isOpen, onClose }: GardenModalProps) => {
     setError(null);
 
     try {
-      const mockPlants: Plant[] = [
-        {
-          id: 1,
-          name: "Rose",
-          description: "Beautiful red roses",
-          image: "/rose1.jpg",
-          category: "flowers",
-        },
-        {
-          id: 2,
-          name: "Tulip",
-          description: "Nice tulip, isn't it?",
-          image: "/tulip1.jpg",
-          category: "flowers",
-        },
-        {
-          id: 3,
-          name: "Dandelion",
-          description: "Grazing in the sun.",
-          image: "/dandelion1.jpg",
-          category: "flowers",
-        },
-        {
-          id: 4,
-          name: "Lotus",
-          description: "Beautifully observant atop of water.",
-          image: "/lotus1.jpg",
-          category: "flowers",
-        },
-        {
-          id: 5,
-          name: "Snowdrop",
-          description: "Patiently awaiting the summer.",
-          image: "/snowdrop1.jpg",
-          category: "flowers",
-        },
-      ];
+      console.log("Fetching plants from: http://localhost:5000/api/flowers");
 
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setPlants(mockPlants);
+      const response = await fetch("http://localhost:5000/api/flowers");
+
+      console.log("Response status:", response.status);
+      console.log("Response ok:", response.ok);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Fetched data:", data);
+      console.log("Data length:", data.length);
+
+      setPlants(data);
     } catch (err) {
+      console.error("Error fetching plants:", err);
       setError("Failed to load plants");
     } finally {
       setLoading(false);
@@ -97,11 +74,11 @@ const GardenModal = ({ isOpen, onClose }: GardenModalProps) => {
       {!loading && !error && (
         <div className="plant-grid">
           {plants.map((plant) => (
-            <div key={plant.id} className="plant-card">
+            <div key={`plant-${plant._id}`} className="plant-card">
               <img src={plant.image} alt={plant.name} />
               <h3>{plant.name}</h3>
               <p>{plant.description}</p>
-              <button>
+              <button className="nature-btn garden small">
                 <span>Select</span>
               </button>
             </div>
