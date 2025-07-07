@@ -15,21 +15,12 @@ $transition-speed: 0.2s;
 .dashboard-main {
   width: 50%;
   display: flex;
-  padding-right: 35%;
-  justify-content: space-evenly;
-  gap: 30px;
+  align-items: flex-start;
+  margin-right: 37.5%;
+  gap: 40px;
 }
 
 .dashboard-signup {
-  width: 50%;
-  display: flex;
-  padding-left: 35%;
-  justify-content: space-evenly;
-  gap: 30px;
-}
-
-nav {
   display: flex;
   gap: 30px;
-  align-items: center;
 }
