@@ -1,12 +1,13 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
-let users = [];
+const User = require("../models/User");
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 
 const authController = {
   signup: async (req, res) => {
+    console.log("🔥 SIGNUP ENDPOINT HIT!");
+    console.log("📥 Request body:", req.body);
     try {
       const { email, password, confirmPassword } = req.body;
 
@@ -59,7 +60,7 @@ const authController = {
         });
       }
 
-      const existingUser = users.find((u) => u.email === email);
+      const existingUser = await User.findOne({ email });
       if (existingUser) {
         return res.status(400).json({ message: "User already exists" });
       }
@@ -67,17 +68,18 @@ const authController = {
       const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-      const newUser = {
-        id: Date.now().toString(),
+      const newUser = new User({
         email,
         password: hashedPassword,
-        createdAt: new Date(),
-      };
+        garden: {
+          flowers: [],
+        },
+      });
 
-      users.push(newUser);
+      await newUser.save();
 
       const token = jwt.sign(
-        { userId: newUser.id, email: newUser.email },
+        { userId: newUser._id, email: newUser.email },
         JWT_SECRET,
         { expiresIn: "24h" }
       );
@@ -86,7 +88,7 @@ const authController = {
         message: "User created successfully",
         token,
         user: {
-          id: newUser.id,
+          id: newUser._id,
           email: newUser.email,
           createdAt: newUser.createdAt,
         },
@@ -107,7 +109,7 @@ const authController = {
           .json({ message: "Email and password are required" });
       }
 
-      const user = users.find((u) => u.email === email);
+      const user = await User.findOne({ email });
       if (!user) {
         return res.status(401).json({ message: "Invalid credentials" });
       }
@@ -118,7 +120,7 @@ const authController = {
       }
 
       const token = jwt.sign(
-        { userId: user.id, email: user.email },
+        { userId: user._id, email: user.email },
         JWT_SECRET,
         { expiresIn: "24h" }
       );
@@ -127,7 +129,7 @@ const authController = {
         message: "Login successful",
         token,
         user: {
-          id: user.id,
+          id: user._id,
           email: user.email,
           createdAt: user.createdAt,
         },
@@ -155,19 +157,25 @@ const authController = {
     });
   },
 
-  getProfile: (req, res) => {
-    const user = users.find((u) => u.id === req.user.userId);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+  getProfile: async (req, res) => {
+    try {
+      const user = await User.findById(req.user.userId).select("-password");
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
 
-    res.json({
-      user: {
-        id: user.id,
-        email: user.email,
-        createdAt: user.createdAt,
-      },
-    });
+      res.json({
+        user: {
+          id: user._id,
+          email: user.email,
+          createdAt: user.createdAt,
+          garden: user.garden,
+        },
+      });
+    } catch (error) {
+      console.error("Profile error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
   },
 };
 
