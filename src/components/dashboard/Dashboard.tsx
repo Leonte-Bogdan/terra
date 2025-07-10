@@ -12,6 +12,16 @@ const Dashboard = ({ children }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
 
+  const switchToSignup = () => {
+    setIsLoginModalOpen(false);
+    setIsSignupModalOpen(true);
+  };
+
+  const switchToLogin = () => {
+    setIsSignupModalOpen(false);
+    setIsLoginModalOpen(true);
+  };
+
   return (
     <div className="dashboard">
       <div className="dashboard-main">
@@ -47,10 +57,13 @@ const Dashboard = ({ children }) => {
         </Link>
 
         <Routes>
+          <Route path="/" element={<div>Home Page</div>} />
           <Route path="/garden" element={<div>Garden Content</div>} />
           <Route path="/terrarium" element={<div>Terrarium Content</div>} />
           <Route path="/about" element={<div>About Content</div>} />
           <Route path="/mastery" element={<div>Mastery Content</div>} />
+          <Route path="/login" element={<div>Login Content</div>} />
+          <Route path="/signup" element={<div>Signup Content</div>} />
         </Routes>
       </div>
       <div className="dashboard-signup">
@@ -64,13 +77,20 @@ const Dashboard = ({ children }) => {
           <LoginModal
             isOpen={isLoginModalOpen}
             onClose={() => setIsLoginModalOpen(false)}
+            onSwitchToSignup={switchToSignup}
           />
         </Link>
         <Link to="/signup">
-          <button className="signup-btn nature-btn small">Sign up</button>
+          <button
+            className="signup-btn nature-btn small"
+            onClick={() => setIsSignupModalOpen(true)}
+          >
+            Sign up
+          </button>
           <SignupModal
             isOpen={isSignupModalOpen}
             onClose={() => setIsSignupModalOpen(false)}
+            onSwitchToLogin={switchToLogin}
           />
         </Link>
       </div>

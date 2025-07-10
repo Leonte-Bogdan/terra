@@ -9,7 +9,7 @@ interface GardenModalProps {
 }
 
 interface Plant {
-  id: string | number;
+  _id: string | number;
   name: string;
   description: string;
   image: string;
