@@ -6,17 +6,18 @@ interface GardenModalProps {
   children?: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
+  onPlantSelect: (plantId: string | number) => void;
 }
 
 interface Plant {
-  id: string | number;
+  _id: number;
   name: string;
   description: string;
   image: string;
   category?: string;
 }
 
-const GardenModal = ({ isOpen, onClose }: GardenModalProps) => {
+const GardenModal = ({ isOpen, onClose, onPlantSelect }: GardenModalProps) => {
   const [plants, setPlants] = useState<Plant[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -55,6 +56,11 @@ const GardenModal = ({ isOpen, onClose }: GardenModalProps) => {
       setLoading(false);
     }
   };
+  const handlePlantSelect = (plant: Plant) => {
+    onPlantSelect(plant._id);
+    console.log(plant._id);
+    onClose();
+  };
 
   return (
     <Modal
@@ -78,7 +84,10 @@ const GardenModal = ({ isOpen, onClose }: GardenModalProps) => {
               <img src={plant.image} alt={plant.name} />
               <h3>{plant.name}</h3>
               <p>{plant.description}</p>
-              <button className="nature-btn garden small">
+              <button
+                className="nature-btn garden small"
+                onClick={() => handlePlantSelect(plant)}
+              >
                 <span>Select</span>
               </button>
             </div>
