@@ -11,6 +11,7 @@ const Dashboard = ({ children }) => {
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const [activePlantId, setActivePlantId] = useState<number | null>(null);
 
   const switchToSignup = () => {
     setIsLoginModalOpen(false);
@@ -20,6 +21,11 @@ const Dashboard = ({ children }) => {
   const switchToLogin = () => {
     setIsSignupModalOpen(false);
     setIsLoginModalOpen(true);
+  }
+
+  const handlePlantSelect = (plantId: number) => {
+    setActivePlantId(plantId);
+    setIsGardenModalOpen(false);
   };
 
   return (
@@ -55,7 +61,39 @@ const Dashboard = ({ children }) => {
         <Link to="/mastery">
           <button className="nature-btn garden small">Mastery</button>
         </Link>
-
+        <nav>
+          <Link to="/garden">
+            <button
+              onClick={() => setIsGardenModalOpen(true)}
+              className="nature-btn sun small"
+            >
+              Garden
+            </button>
+            <GardenModal
+              isOpen={isGardenModalOpen}
+              onClose={() => setIsGardenModalOpen(false)}
+              onPlantSelect={handlePlantSelect}
+            />
+          </Link>
+          <Link to="/terrarium">
+            <button className="nature-btn leaf small">Terrarium</button>
+          </Link>
+          <Link to="/about">
+            <button
+              onClick={() => setIsAboutModalOpen(true)}
+              className="nature-btn flower small"
+            >
+              About
+            </button>
+            <AboutModal
+              isOpen={isAboutModalOpen}
+              onClose={() => setIsAboutModalOpen(false)}
+            />
+          </Link>
+          <Link to="/mastery">
+            <button className="nature-btn garden small">Mastery</button>
+          </Link>
+        </nav>
         <Routes>
           <Route path="/" element={<div>Home Page</div>} />
           <Route path="/garden" element={<div>Garden Content</div>} />
@@ -93,6 +131,13 @@ const Dashboard = ({ children }) => {
             onSwitchToLogin={switchToLogin}
           />
         </Link>
+        <button
+          onClick={console.log("clicked")}
+          className="login-btn nature-btn small"
+        >
+          Log in
+        </button>
+        <button className="signup-btn nature-btn small">Sign up</button>
       </div>
     </div>
   );

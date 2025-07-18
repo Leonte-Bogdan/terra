@@ -23,4 +23,42 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.put("/:id/water", async (req, res) => {
+  try {
+    const flower = await Flower.findOne({ id: req.params.id });
+
+    if (!flower) {
+      return res.status(404).json({ message: "Flower not found" });
+    }
+
+    const previousLevel = flower.waterLevel;
+
+    flower.waterLevel = 100;
+    flower.lastWatered = new Date();
+    flower.wateringHistory.push({
+      waterLevel: 100,
+      previousLevel: previousLevel,
+    });
+
+    await flower.save();
+    res.json(flower);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.put("/:id/water-level", async (req, res) => {
+  try {
+    const flower = await Flower.findOne({ id: req.params.id });
+    if (!flower) {
+      return res.status(404).json({ message: "Flower not found" });
+    }
+
+    flower.waterLevel = req.body.waterLevel;
+    await flower.save();
+    res.json(flower);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 module.exports = router;

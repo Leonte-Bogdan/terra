@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./PlantRoom.scss";
+import WateringBar from "../watering-bar/WateringBar";
 
 const PlantRoom = () => {
   const [selectedTool, setSelectedTool] = useState(null);
+  const [showWateringBar, setShowWateringBar] = useState(false);
+  const wateringBarRef = useRef(null);
 
   useEffect(() => {
     document.body.classList.remove(
@@ -32,6 +35,25 @@ const PlantRoom = () => {
     setSelectedTool(selectedTool === tool ? null : tool);
   };
 
+  const handlePotClick = () => {
+    if (selectedTool === "watering-cursor") {
+      if (wateringBarRef.current) {
+        wateringBarRef.current();
+      }
+      setSelectedTool(null);
+    }
+  };
+
+  const handlePotHover = (isHovering) => {
+    if (selectedTool === "watering") {
+      setShowWateringBar(isHovering);
+    }
+  };
+
+  const handleCloseWateringBar = () => {
+    setShowWateringBar(false);
+  };
+
   const icons = {
     WateringCanIcon: "/watering-can.svg",
     ScissorsIcon: "/scissors.svg",
@@ -40,6 +62,7 @@ const PlantRoom = () => {
     DirtIcon: "./dirt-bag.svg",
     BasketIcon: "./basket.svg",
   };
+
   return (
     <div className="user-interface">
       <div className="wall-background"></div>
@@ -86,8 +109,18 @@ const PlantRoom = () => {
             <img src={icons.DirtIcon} alt="dirt" />
           </div>
         </div>
-        <div className="pot-container">
+        <div
+          className="pot-container"
+          onClick={handlePotClick}
+          onMouseEnter={() => handlePotHover(true)}
+        >
           <div className="flower-pot" />
+          <WateringBar
+            plantId="plant-1"
+            initialWaterLevel={75}
+            isVisible={showWateringBar}
+            onClose={handleCloseWateringBar}
+          />
         </div>
       </div>
     </div>
