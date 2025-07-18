@@ -1,0 +1,92 @@
+.signup-modal {
+  .ant-modal-header {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 16px 24px;
+
+    .ant-modal-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+  }
+
+  .ant-modal-body {
+    padding: 24px;
+  }
+
+  .ant-form-item-label > label {
+    font-weight: 500;
+    color: #34495e;
+  }
+
+  .ant-input-affix-wrapper,
+  .ant-input {
+    border-radius: 6px;
+
+    &:hover {
+      border-color: #52c41a;
+    }
+
+    &:focus,
+    &.ant-input-focused {
+      border-color: #52c41a;
+      box-shadow: 0 0 0 2px rgba(82, 196, 26, 0.2);
+    }
+  }
+
+  .signup-button {
+    background-color: #52c41a;
+    border-color: #52c41a;
+    border-radius: 6px;
+    font-weight: 500;
+    margin-top: 16px;
+
+    &:hover {
+      background-color: #73d13d;
+      border-color: #73d13d;
+    }
+  }
+
+  .signup-modal-footer {
+    margin-top: 24px;
+    text-align: center;
+
+    .login-link {
+      color: #666;
+      font-size: 14px;
+
+      .modal-link {
+        color: #52c41a;
+        text-decoration: none;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .ant-alert {
+    border-radius: 6px;
+  }
+
+  // Form validation styling
+  .ant-form-item-has-error {
+    .ant-input,
+    .ant-input-affix-wrapper {
+      border-color: #ff4d4f;
+
+      &:hover {
+        border-color: #ff4d4f;
+      }
+
+      &:focus,
+      &.ant-input-focused {
+        border-color: #ff4d4f;
+        box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
+      }
+    }
+  }
+}

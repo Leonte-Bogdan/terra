@@ -7,6 +7,7 @@ import Popup from "./components/popup/Popup";
 import Dashboard from "./components/dashboard/Dashboard";
 import UserInterface from "./components/plant-creation/PlantRoom";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router";
+import "@ant-design/v5-patch-for-react-19";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
