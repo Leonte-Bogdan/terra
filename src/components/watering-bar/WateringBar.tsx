@@ -5,18 +5,31 @@ import {
   forwardRef,
   useImperativeHandle,
 } from "react";
+import { usePlant } from "../../hooks/usePlant";
 import "./WateringBar.scss";
 
 const WateringBar = forwardRef(
-  ({ plantId, initialWaterLevel = 75, isVisible = false, onClose }, ref) => {
-    const [waterLevel, setWaterLevel] = useState(initialWaterLevel);
-    const [lastWatered, setLastWatered] = useState(new Date());
+  ({ plantId, isVisible = false, onClose }, ref) => {
+    const {
+      plantData,
+      loading,
+      error,
+      waterPlant: waterPlantAPI,
+    } = usePlant(plantId);
+
+    const [localWaterLevel, setLocalWaterLevel] = useState(75);
+
+    useEffect(() => {
+      if (plantData) {
+        setLocalWaterLevel(plantData.waterLevel);
+      }
+    }, [plantData]);
 
     useEffect(() => {
       if (!isVisible) return;
 
       const interval = setInterval(() => {
-        setWaterLevel((prev) => {
+        setLocalWaterLevel((prev) => {
           const newLevel = prev - 0.5;
           return Math.max(0, newLevel);
         });
@@ -26,6 +39,7 @@ const WateringBar = forwardRef(
     }, [isVisible]);
 
     const getWaterStatus = () => {
+      const waterLevel = localWaterLevel;
       if (waterLevel <= 20)
         return {
           status: "critical",
@@ -47,12 +61,15 @@ const WateringBar = forwardRef(
       return { status: "good", message: "Well hydrated", color: "#10b981" };
     };
 
-    const waterPlant = () => {
-      setWaterLevel(100);
-      setLastWatered(new Date());
+    const waterPlant = async () => {
+      try {
+        await waterPlantAPI();
+        setLocalWaterLevel(100);
+      } catch (error) {
+        console.error("Failed to water plant:", error);
+      }
     };
 
-    // Expose waterPlant function to parent component
     useImperativeHandle(ref, () => ({
       waterPlant,
     }));
@@ -61,14 +78,32 @@ const WateringBar = forwardRef(
 
     if (!isVisible) return null;
 
+    if (loading) {
+      return (
+        <div className="watering-bar-container">
+          <div className="loading">Loading plant data...</div>
+        </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <div className="watering-bar-container">
+          <div className="error">Error: {error}</div>
+        </div>
+      );
+    }
+
     return (
       <div className="watering-bar-container">
         <div className="watering-bar-header">
           <div className="water-icon" style={{ color: status.color }}>
             💧
           </div>
-          <span className="water-level-text">{Math.round(waterLevel)}%</span>
-          {waterLevel <= 20 && <span className="alert-icon">⚠️</span>}
+          <span className="water-level-text">
+            {Math.round(localWaterLevel)}%
+          </span>
+          {localWaterLevel <= 20 && <span className="alert-icon">⚠️</span>}
           <button className="close-button" onClick={onClose}>
             ×
           </button>
@@ -78,7 +113,7 @@ const WateringBar = forwardRef(
           <div
             className="water-fill"
             style={{
-              width: `${waterLevel}%`,
+              width: `${localWaterLevel}%`,
               backgroundColor: status.color,
             }}
           />
@@ -89,14 +124,17 @@ const WateringBar = forwardRef(
             {status.message}
           </span>
           <span className="last-watered">
-            Last watered: {lastWatered.toLocaleTimeString()}
+            Last watered:{" "}
+            {plantData?.lastWatered
+              ? new Date(plantData.lastWatered).toLocaleTimeString()
+              : "Unknown"}
           </span>
         </div>
 
         <button
           className="water-button"
           onClick={waterPlant}
-          disabled={waterLevel > 90}
+          disabled={localWaterLevel > 90}
         >
           💧 Water Plant
         </button>

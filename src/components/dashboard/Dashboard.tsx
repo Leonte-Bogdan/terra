@@ -7,6 +7,12 @@ import AboutModal from "./modals/AboutModal";
 const Dashboard = ({ children }) => {
   const [isGardenModalOpen, setIsGardenModalOpen] = useState(false);
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
+  const [activePlantId, setActivePlantId] = useState<number | null>(null);
+
+  const handlePlantSelect = (plantId: number) => {
+    setActivePlantId(plantId);
+    setIsGardenModalOpen(false);
+  };
 
   return (
     <div className="dashboard">
@@ -22,6 +28,7 @@ const Dashboard = ({ children }) => {
             <GardenModal
               isOpen={isGardenModalOpen}
               onClose={() => setIsGardenModalOpen(false)}
+              onPlantSelect={handlePlantSelect}
             />
           </Link>
           <Link to="/terrarium">
@@ -53,7 +60,12 @@ const Dashboard = ({ children }) => {
         </Routes>
       </div>
       <div className="dashboard-signup">
-        <button className="login-btn nature-btn small">Log in</button>
+        <button
+          onClick={console.log("clicked")}
+          className="login-btn nature-btn small"
+        >
+          Log in
+        </button>
         <button className="signup-btn nature-btn small">Sign up</button>
       </div>
     </div>
